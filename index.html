@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  width: 360px;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: float 4s ease-in-out infinite;
+  z-index: 2;
+}
+
+h1 { color: #ff4b5c; }
+
+p {
+  color: #555;
+  font-size: 16px;
+  min-height: 60px;
+}
+
+button {
+  margin: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4b5c;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover { transform: scale(1.05); }
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 🎂 Cake */
+.cake {
+  display: none;
+  margin: 10px auto;
+  width: 120px;
+  height: 90px;
+  background: #ffb3c1;
+  border-radius: 10px;
+  position: relative;
+}
+
+.cake::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 10px;
+  height: 20px;
+  background: orange;
+  border-radius: 5px;
+  transform: translateX(-50%);
+  animation: flame 1s infinite;
+}
+
+@keyframes flame {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.2); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+/* ❤️ Hearts */
+.heart {
+  position: absolute;
+  font-size: 22px;
+  animation: rise 4s linear infinite;
+}
+
+@keyframes rise {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+.proposal { display: none; }
+.result {
+  font-weight: bold;
+  color: #ff4b5c;
+}
+</style>
+</head>
+
+<body onclick="enableSound()">
+
+<!-- 🎵 MUSIC (AUTOPLAY FIXED) -->
+<audio id="bgMusic" autoplay muted loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <h1>Happy Birthday ❤️</h1>
+  <p id="message">To the most special girl in my life…</p>
+
+  <div class="cake" id="cake"></div>
+
+  <button onclick="nextMessage()">Tap Me 🎁</button>
+
+  <div class="proposal" id="proposal">
+    <p>Will you be my Valentine? 💍❤️</p>
+    <button onclick="yesClicked()">YES ❤️</button>
+    <button onclick="noClicked()">NO 😒</button>
+  </div>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+const music = document.getElementById("bgMusic");
+let soundEnabled = false;
+
+function enableSound() {
+  if (!soundEnabled) {
+    music.muted = false;
+    soundEnabled = true;
+  }
+}
+
+const messages = [
+  "Happy Birthday my love Suku (Meri Boobie) ❤️",
+  "You make my world brighter every day ✨",
+  "With you, everything feels right 🫶",
+  "Thank you for being you 💖",
+  "I want to spend every birthday with you 🎂"
+];
+
+let index = 0;
+
+function nextMessage() {
+  if (index < messages.length) {
+    document.getElementById("message").innerText = messages[index];
+    index++;
+
+    if (index === messages.length) {
+      document.getElementById("cake").style.display = "block";
+    }
+  } else {
+    document.getElementById("proposal").style.display = "block";
+  }
+}
+
+function yesClicked() {
+  document.getElementById("result").innerText =
+    "YAY ❤️ I knew it!!! Forever starts now 💖";
+  explodeHearts();
+}
+
+function noClicked() {
+  document.getElementById("result").innerText =
+    "Wrong answer 😤 Try again 😏❤️";
+}
+
+function explodeHearts() {
+  for (let i = 0; i < 70; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+}
+</script>
+
+</body>
+</html>
