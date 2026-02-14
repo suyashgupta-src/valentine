@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine's Surprise</title>
 
 <style>
-/* Modern Font Import */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
 
 * {
@@ -23,181 +22,146 @@ body {
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
   position: relative;
-  background-color: #1a1a1a; /* Fallback */
 }
 
-/* 🐹 Background Image - Preserved */
+/* 💕 YOUR IMAGE BACKGROUND */
 body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("suku.png") center 30%/cover no-repeat;
-  filter: blur(5px) brightness(0.8);
+  background: url("suku.png") center center/cover no-repeat;
+  filter: blur(6px) brightness(0.7);
   z-index: -2;
 }
 
+/* Dark romantic overlay */
 body::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+  background: radial-gradient(circle at center, rgba(255, 0, 100, 0.25), rgba(0,0,0,0.6));
   z-index: -1;
 }
 
+/* 💌 Romantic Card */
 .card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(25px);
   width: 90%;
-  max-width: 380px;
-  padding: 40px 20px;
-  border-radius: 30px;
+  max-width: 400px;
+  padding: 45px 25px;
+  border-radius: 40px;
   text-align: center;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  box-shadow: 0 0 40px rgba(255, 0, 120, 0.4);
+  border: 1px solid rgba(255,255,255,0.3);
   animation: float 4s ease-in-out infinite;
-  position: relative;
-  z-index: 10;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 h1 { 
-  color: #ff4b5c; 
+  color: #ff4b7d; 
   font-family: 'Dancing Script', cursive;
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 20px rgba(255, 0, 100, 0.6);
 }
 
 p {
-  color: #444;
-  font-size: 1.1rem;
-  line-height: 1.5;
+  color: white;
+  font-size: 1.2rem;
+  line-height: 1.6;
   min-height: 50px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
 
-.btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  min-height: 60px;
-  position: relative;
-}
-
+/* 💘 Buttons */
 button {
-  padding: 12px 28px;
+  padding: 14px 32px;
   border: none;
   border-radius: 50px;
-  background: #ff4b5c;
+  background: linear-gradient(45deg, #ff4b7d, #ff758c);
   color: white;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 4px 15px rgba(255, 75, 92, 0.3);
+  transition: 0.3s ease;
+  box-shadow: 0 8px 30px rgba(255, 0, 120, 0.6);
 }
 
-#yesBtn {
-  z-index: 5;
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 40px rgba(255, 0, 120, 0.9);
 }
 
 #noBtn {
-  background: #666;
-  position: relative;
-  white-space: nowrap;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  background: linear-gradient(45deg, #777, #aaa);
 }
 
 .proposal { 
   display: none; 
-  transition: opacity 0.5s ease;
 }
 
 .result {
   font-weight: 600;
-  color: #ff4b5c;
+  color: #ff4b7d;
   margin-top: 20px;
-  font-size: 1.1rem;
-  padding: 0 10px;
+  font-size: 1.3rem;
 }
 
-/* 💓 Floating Hearts Background */
+/* Floating Hearts */
 .bgHeart {
   position: absolute;
   pointer-events: none;
-  z-index: 1;
   animation: rise linear forwards;
 }
 
 @keyframes rise {
   0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
-  20% { opacity: 0.8; }
-  100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
-}
-
-@media (max-width: 400px) {
-  .card { width: 85%; padding: 30px 15px; }
-  h1 { font-size: 2rem; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-20vh) scale(1.4); opacity: 0; }
 }
 </style>
 </head>
 
 <body onclick="enableSound()">
 
-  <!-- 🎵 MUSIC (AUTOPLAY FIXED) -->
 <audio id="bgMusic" autoplay muted loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- <div class="card" id="card">
-  <h1>For you : </h1>
-
-  <div id="initialAction">
-    <button onclick="nextMessage()" id="mainBtn">Tap to Reveal ✨</button>
-  </div>
-
-  <div class="proposal" id="proposal">
-    <p>Will you be my Valentine? 💍</p>
-    <div class="btn-container">
-        <button id="yesBtn" onclick="yesClicked()">YES! ❤️</button>
-        <button id="noBtn">NO 😒</button>
-    </div>
-  </div>
-
-  <div class="result" id="result"></div>
-</div> -->
-  <div class="card" id="card">
-  <h1>For you : </h1>
+<div class="card" id="card">
+  <h1>For you :</h1>
 
   <p id="message"></p>
 
   <div id="initialAction">
-    <button onclick="nextMessage()" id="mainBtn">Tap to Reveal ✨</button>
+    <button onclick="nextMessage()" id="mainBtn">Tap to Reveal 💖</button>
   </div>
 
   <div class="proposal" id="proposal">
     <p>Will you be my Valentine? 💍</p>
-    <div class="btn-container">
+    <div>
         <button id="yesBtn" onclick="yesClicked()">YES! ❤️</button>
         <button id="noBtn">NO 😒</button>
     </div>
-    
-    
   </div>
 
   <div class="result" id="result"></div>
 </div>
-  <script>
+
+<script>
 const music = document.getElementById("bgMusic");
 let soundEnabled = false;
 
 function enableSound() {
     if (!soundEnabled) {
         music.muted = false;
-        music.play().catch(e => console.log("Audio play blocked"));
+        music.play().catch(() => {});
         soundEnabled = true;
     }
 }
@@ -213,103 +177,47 @@ let index = 0;
 let yesScale = 1;
 
 function nextMessage() {
-    enableSound(); // Ensures music starts on first interaction
+    enableSound();
     const msgElement = document.getElementById("message");
     const mainBtn = document.getElementById("mainBtn");
 
     if (index < messages.length) {
-        msgElement.style.opacity = 0;
-        
-        setTimeout(() => {
-            msgElement.innerText = messages[index];
-            msgElement.style.opacity = 1;
-            index++;
-            
-            // Change button text after first click
-            if(index === 1) mainBtn.innerText = "Next ❤️";
+        msgElement.innerText = messages[index];
+        index++;
 
-            if (index === messages.length) {
-                mainBtn.style.display = "none";
-                setTimeout(showProposal, 800);
-            }
-        }, 300);
+        if(index === 1) mainBtn.innerText = "Next ❤️";
+
+        if (index === messages.length) {
+            mainBtn.style.display = "none";
+            setTimeout(showProposal, 800);
+        }
     }
 }
 
 function showProposal() {
     document.getElementById("proposal").style.display = "block";
-    popCard();
 }
 
 const noBtn = document.getElementById("noBtn");
 
-const moveNoButton = (e) => {
-    if(e.type === 'touchstart') e.preventDefault();
-    
-    // Fixed: Added backticks and proper translate syntax
+const moveNoButton = () => {
     const x = Math.random() * 160 - 80; 
     const y = Math.random() * 100 - 50; 
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
     
-    // Fixed: Added backticks and proper scale syntax
     yesScale += 0.15;
     document.getElementById("yesBtn").style.transform = `scale(${yesScale})`;
 };
 
 noBtn.addEventListener("mouseover", moveNoButton);
-noBtn.addEventListener("touchstart", moveNoButton);
 
 function yesClicked() {
     document.getElementById("proposal").style.display = "none";
     document.getElementById("message").style.display = "none";
     document.getElementById("result").innerHTML = 
         "You just made me the happiest person alive! ❤️<br><br>See you soon babes 😉";
-    explodeHearts();
-}
-
-function explodeHearts() {
-    for (let i = 0; i < 50; i++) {
-        setTimeout(() => {
-            createHeart(true);
-        }, i * 50);
-    }
-}
-
-function createHeart(isExplosion = false) {
-    const heart = document.createElement("div");
-    if (!isExplosion) heart.className = "bgHeart";
-    
-    heart.innerText = ["❤️", "💖", "💝", "✨"][Math.floor(Math.random() * 4)];
-    heart.style.position = "absolute";
-    heart.style.left = Math.random() * 100 + "vw";
-    
-    if (isExplosion) {
-        heart.style.top = "100vh";
-        heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-        // Fixed: Added backticks for animation string
-        heart.style.animation = `rise ${2 + Math.random() * 2}s ease-out forwards`;
-    } else {
-        heart.style.fontSize = (Math.random() * 15 + 10) + "px";
-        heart.style.animationDuration = (4 + Math.random() * 3) + "s";
-        heart.style.top = "110vh"; // Start below screen
-    }
-    
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-}
-
-setInterval(() => createHeart(false), 1000);
-
-function popCard() {
-    const card = document.getElementById("card");
-    card.style.transform = "scale(1.1)";
-    setTimeout(() => card.style.transform = "scale(1)", 200);
 }
 </script>
 
 </body>
 </html>
-
-
-
-
